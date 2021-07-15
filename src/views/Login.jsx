@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Card from './components/Cards'
-import FormGroup from './components/FormGroup'
+import Card from '../components/Cards'
+import FormGroup from '../components/FormGroup'
 
 export default function Login(){
 
