@@ -1,7 +1,19 @@
 import React, { useState } from 'react'
 
+import ApiServices from '../Services/ApiServices'
+
 export default function Home(){
     const [saldo, setSaldo] = useState(0)
+
+    const usuarioLogadoString = localStorage.getItem('_usuario_logado')
+    const usuarioLodado = JSON.parse(usuarioLogadoString)
+
+    ApiServices.obterSaldo(usuarioLodado.id)
+            .then(response => {
+                setSaldo(response.data)
+            }).catch(error => {
+                console.error(error.response)
+            })
 
     return(
         <div className="container">

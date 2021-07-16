@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
 import { withRouter } from 'react-router-dom'
-
-import axios from 'axios'
+import ApiServices from '../Services/ApiServices'
 
 function Login(props){
 
@@ -12,8 +11,11 @@ function Login(props){
     const [mensagemErro, setMensagemErro] = useState(null)
 
     function entrar(){
-        axios.post('http://localhost:8080/api/usuarios/autenticar', {email: email, senha: senha})
-            .then(response => {props.history.push('/home')})
+        ApiServices.autenticar({email: email, senha: senha})
+            .then(response => {
+                localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+                props.history.push('/home')
+            })
             .catch(erro => {setMensagemErro(erro.response.data)})
     }
 
