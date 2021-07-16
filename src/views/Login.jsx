@@ -3,14 +3,18 @@ import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
 import { withRouter } from 'react-router-dom'
 
+import axios from 'axios'
+
 function Login(props){
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
+    const [mensagemErro, setMensagemErro] = useState(null)
 
     function entrar(){
-        console.log('Email: ', email)
-        console.log('Senha: ', senha)
+        axios.post('http://localhost:8080/api/usuarios/autenticar', {email: email, senha: senha})
+            .then(response => {props.history.push('/home')})
+            .catch(erro => {setMensagemErro(erro.response.data)})
     }
 
     function prepareCadastrar(){
@@ -46,6 +50,8 @@ function Login(props){
 
                                             <button className="btn btn-success" onClick={entrar}>Entrar</button>
                                             <button onClick={prepareCadastrar} className="btn btn-danger">Cadastar</button>
+
+                                            <span>{mensagemErro}</span>
 
                                         </fieldset>
                                     </div>
