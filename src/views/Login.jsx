@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
+import { withRouter } from 'react-router-dom'
 
-export default function Login(){
+function Login(props){
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -10,6 +11,10 @@ export default function Login(){
     function entrar(){
         console.log('Email: ', email)
         console.log('Senha: ', senha)
+    }
+
+    function prepareCadastrar(){
+        props.history.push('/cadastroUsuario')
     }
 
     return(
@@ -40,7 +45,7 @@ export default function Login(){
                                             </FormGroup>
 
                                             <button className="btn btn-success" onClick={entrar}>Entrar</button>
-                                            <button className="btn btn-danger">Cancelar</button>
+                                            <button onClick={prepareCadastrar} className="btn btn-danger">Cadastar</button>
 
                                         </fieldset>
                                     </div>
@@ -53,3 +58,5 @@ export default function Login(){
         </div>
     )
 }
+
+export default withRouter(Login)

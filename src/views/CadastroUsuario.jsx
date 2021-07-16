@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom';
 
 import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
 
-export default function CadastroUsuario(){
+function CadastroUsuario(props){
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
@@ -14,6 +15,10 @@ export default function CadastroUsuario(){
 
     function cadastrar(){
         console.log(state)
+    }
+
+    function cancelar(){
+        props.history.push('/login')
     }
 
     return(
@@ -55,7 +60,7 @@ export default function CadastroUsuario(){
                             </FormGroup>
 
                             <button onClick={cadastrar} type="button" className="btn btn-success">Salvar</button>
-                            <button type="button" className="btn btn-danger">Cancelar</button>
+                            <button onClick={cancelar} type="button" className="btn btn-danger">Cancelar</button>
                         </div>
                     </div>
                 </div>
@@ -63,3 +68,5 @@ export default function CadastroUsuario(){
         </div>
     )
 }
+
+export default withRouter(CadastroUsuario)
