@@ -2,13 +2,13 @@ import axios from "axios"
 
 const baseUrl = 'http://localhost:8080'
 
-export default new class ApiServices{
+export default class ApiServices{
     
-    obterSaldo(id){
+    static obterSaldo(id){
         return axios.get(`${baseUrl}/api/usuarios/${id}/saldo`)
     }
 
-    autenticar(obj={}){
+    static autenticar(obj={}){
         return axios.post(`${baseUrl}/api/usuarios/autenticar`, obj);
     }
 }

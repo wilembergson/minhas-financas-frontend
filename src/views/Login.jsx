@@ -3,12 +3,12 @@ import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
 import { withRouter } from 'react-router-dom'
 import ApiServices from '../Services/ApiServices'
+import {mensagemErro} from '../components/Taostr.js'
 
 function Login(props){
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-    const [mensagemErro, setMensagemErro] = useState(null)
 
     function entrar(){
         ApiServices.autenticar({email: email, senha: senha})
@@ -16,7 +16,9 @@ function Login(props){
                 localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
                 props.history.push('/home')
             })
-            .catch(erro => {setMensagemErro(erro.response.data)})
+            .catch(erro => {
+                mensagemErro(erro.response.data)
+            })
     }
 
     function prepareCadastrar(){
