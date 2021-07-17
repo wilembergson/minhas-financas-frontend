@@ -11,5 +11,9 @@ export default class ApiServices{
     static autenticar(obj={}){
         return axios.post(`${baseUrl}/api/usuarios/autenticar`, obj);
     }
+
+    static salvarUsuario(obj={}){
+        return axios.post(`${baseUrl}/api/usuarios`, obj)
+    }
 }
 

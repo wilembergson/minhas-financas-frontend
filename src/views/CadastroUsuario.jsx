@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 
 import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
+import ApiServices from '../Services/ApiServices';
+import {mensagemErro, mensagemSucesso} from '../components/Taostr'
 
 function CadastroUsuario(props){
 
@@ -11,10 +13,27 @@ function CadastroUsuario(props){
     const [senha, setSenha] = useState('');
     const [senhaRepeticao, setSenhaRepericao] = useState('');
 
-    const state = {nome: nome, email: email, senha: senha, senhaRepeticao: senhaRepeticao}
+    const state = {
+        nome: nome, 
+        email: email,
+        senha: senha, 
+        senhaRepeticao: senhaRepeticao
+    }
 
     function cadastrar(){
-        console.log(state)
+        const usuario = {
+            email: state.email,
+            nome: state.nome,
+            senha: state.senha
+        }
+        ApiServices.salvarUsuario(usuario)
+        .then(response => {
+            mensagemSucesso('Usuario cadastrado com sucesso. Faça o login para acessar o sistema.')
+            props.history.push('/login')
+        }).catch(error => {
+            mensagemErro(error.response.data)
+        })
+        
     }
 
     function cancelar(){
