@@ -2,8 +2,31 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
+import SelectMenu from '../components/SelectMenu'
 
 function ConsultaLancamentos(){
+    const meses = [
+        {label:'SELECIONE', value: ''},
+        {label:'Janeiro', value: 1},
+        {label:'Fevereiro', value: 2},
+        {label:'Março', value: 3},
+        {label:'Abril', value: 4},
+        {label:'Maio', value: 5},
+        {label:'Junho', value: 6},
+        {label:'Julho', value: 7},
+        {label:'Agosto', value: 8},
+        {label:'Setembro', value: 9},
+        {label:'Outubro', value: 10},
+        {label:'Novembro', value: 11},
+        {label:'Dezembro', value: 12}
+    ]
+
+    const tipos = [
+        {label:'SELECIONE', value: ''},
+        {label:'Despesa', value: 'DESPESA'},
+        {label:'Receita', value: 'RECEITA'}
+    ]
+
     return(
         <Card title="Consulta Lançamentos">
             <div className="row">
@@ -11,13 +34,19 @@ function ConsultaLancamentos(){
                     <div className="bs-component">
                         <FormGroup htmlFor="inputAno" label="Ano: *">
                             <input type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     id="inputAno"
                                     aria-describedby="emailHelp"
                                     placeholder="Digite o ano" />
                         </FormGroup>
 
-                        
+                        <FormGroup htmlFor="inputMes" label="Mês: ">
+                            <SelectMenu id="inputMes" className="form-control" lista={meses}/>
+                        </FormGroup>
+
+                        <FormGroup htmlFor="inputTipo" label="Tipo lançamento: ">
+                            <SelectMenu id="inputTipo" className="form-control" lista={tipos}/>
+                        </FormGroup>       
                     </div>
                 </div>
             </div>
