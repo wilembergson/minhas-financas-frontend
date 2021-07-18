@@ -72,8 +72,7 @@ function CadastroUsuario(props){
     }
 
     return(
-        <div className="container">
-            <Card title="Cadastro de usuário">
+        <Card title="Cadastro de usuário">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="bs-component">
@@ -115,7 +114,6 @@ function CadastroUsuario(props){
                     </div>
                 </div>
             </Card>
-        </div>
     )
 }
 
