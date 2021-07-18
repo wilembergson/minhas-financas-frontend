@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 
 import ApiServices from '../Services/ApiServices'
+import LocalStorageService from '../Services/LocalStorageService'
 
 export default function Home(){
     const [saldo, setSaldo] = useState(0)
 
-    const usuarioLogadoString = localStorage.getItem('_usuario_logado')
-    const usuarioLodado = JSON.parse(usuarioLogadoString)
+    const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
 
-    ApiServices.obterSaldo(usuarioLodado.id)
+    ApiServices.obterSaldo(usuarioLogado.id)
             .then(response => {
                 setSaldo(response.data)
             }).catch(error => {
@@ -17,7 +17,7 @@ export default function Home(){
 
     return(
         <div className="jumbotron">
-                <h1 className="display-3">Bem vindo, {usuarioLodado.nome}!</h1>
+                <h1 className="display-3">Bem vindo, {usuarioLogado.nome}!</h1>
                 <p className="lead">Esse é seu sistema de finanças.</p>
                 <p className="lead">Seu saldo para o mês atual é de R${saldo}</p>
                 <hr className="my-4"/>
