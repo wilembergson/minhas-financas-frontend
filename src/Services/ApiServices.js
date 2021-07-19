@@ -16,6 +16,10 @@ export default class ApiServices{
         return axios.post(`${baseUrl}/api/usuarios`, obj)
     }
 
+    static salvarLancamento(lancamento){
+        return axios.post(`${baseUrl}/api/lancamentos`, lancamento)
+    }
+
     static consultarLancamento(lancamentoFiltro){
         let params = `?ano=${lancamentoFiltro.ano}`
 
