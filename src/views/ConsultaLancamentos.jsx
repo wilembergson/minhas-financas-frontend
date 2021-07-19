@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react' 
+import React, { useState } from 'react' 
 import { withRouter } from 'react-router-dom'
 import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
@@ -9,11 +9,16 @@ import ApiServices from '../Services/ApiServices'
 import LocalStorageService from '../Services/LocalStorageService'
 import * as messages from '../components/Taostr'
 
+import { Dialog } from 'primereact/dialog'
+import { Button } from 'primereact/button'
+
 function ConsultaLancamentos(){
     const [ano, setAno] = useState('')
     const [mes, setMes] = useState('')
     const [tipo, setTipo] = useState('')
     const [descricao, setDescricao] = useState('')
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false)
+    const [lancamentoDeletar, setLancamentoDeletar] = useState({})
     const [lancamentos, setLancamentos] = useState([])
     
     function buscar(){
@@ -21,7 +26,7 @@ function ConsultaLancamentos(){
             messages.mensagemErro('O preenchimento do campo ano é obrigatório.')
             return false
         }
-
+        
         atualizarTabela()
     }
 
@@ -29,10 +34,21 @@ function ConsultaLancamentos(){
         console.log('Editando o lançamento.', id)
     }
 
-    function deletar(id){
-        ApiServices.deletarLancamento(id)
+    function abirConfirmacao(lancamento){
+        setShowConfirmDialog(true)
+        setLancamentoDeletar(lancamento)
+    }
+
+    function cancelarDelecao(){
+        setShowConfirmDialog(false)
+        setLancamentoDeletar({})
+    }
+
+    function deletar(){
+        ApiServices.deletarLancamento(lancamentoDeletar.id)
                     .then(response => {
                         atualizarTabela()
+                        setShowConfirmDialog(false)
                         messages.mensagemSucesso('Lançamento deletado com sucesso.')
                     }).catch(error => {
                         messages.mensagemErro('Ocorreu um erro ao tentar deletar o lançamento.')
@@ -62,9 +78,15 @@ function ConsultaLancamentos(){
 
     const tipos = ApiServices.obterListaTipos()
 
-    useEffect(() => {
-        
-    }, [lancamentos])
+    function confirmDialogFooter(){
+        return(
+            <div>
+                <Button label="Confirmar" icon="pi pi-check" onClick={deletar}/>
+                <Button label="Cancelar" icon="pi pi-times" onClick={cancelarDelecao} className="p-button-secundary"/>
+
+            </div>
+        )
+    }
 
     return(
         <Card title="Consulta Lançamentos">
@@ -114,9 +136,20 @@ function ConsultaLancamentos(){
             <div className="row">
                 <div className="col-md-12">
                     <div className="bs-component">
-                        <LancamentosTable lancamentos={lancamentos} editAction={editar} deleteAction={deletar}/>
+                        <LancamentosTable lancamentos={lancamentos} editAction={editar} deleteAction={abirConfirmacao}/>
                     </div>
                 </div>
+            </div>
+
+            <div>
+                <Dialog header="Confirmação"
+                        visible={showConfirmDialog} 
+                        onHide={() => setShowConfirmDialog(false)} 
+                        footer={confirmDialogFooter}
+                        breakpoints={{'960px': '75vw', '640px': '100vw'}} 
+                        style={{width: '50vw'}}>
+                    Tem certeza que deseja excluir este lançameto?
+                </Dialog>
             </div>
         </Card>
     )
