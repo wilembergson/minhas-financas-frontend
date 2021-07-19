@@ -1,4 +1,4 @@
-import React, { useState } from 'react' 
+import React, { useState, useEffect } from 'react' 
 import { withRouter } from 'react-router-dom'
 import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
@@ -7,55 +7,64 @@ import LancamentosTable from './LancamentosTable'
 
 import ApiServices from '../Services/ApiServices'
 import LocalStorageService from '../Services/LocalStorageService'
+import * as messages from '../components/Taostr'
 
 function ConsultaLancamentos(){
     const [ano, setAno] = useState('')
     const [mes, setMes] = useState('')
     const [tipo, setTipo] = useState('')
+    const [descricao, setDescricao] = useState('')
     const [lancamentos, setLancamentos] = useState([])
     
-
     function buscar(){
-        
-        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
+        if(!ano){
+            messages.mensagemErro('O preenchimento do campo ano é obrigatório.')
+            return false
+        }
 
-       const lancamentoFiltro = {
+        atualizarTabela()
+    }
+
+    function editar(id){
+        console.log('Editando o lançamento.', id)
+    }
+
+    function deletar(id){
+        ApiServices.deletarLancamento(id)
+                    .then(response => {
+                        atualizarTabela()
+                        messages.mensagemSucesso('Lançamento deletado com sucesso.')
+                    }).catch(error => {
+                        messages.mensagemErro('Ocorreu um erro ao tentar deletar o lançamento.')
+                    })
+    }
+
+    function atualizarTabela(){
+        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
+        const lancamentoFiltro = {
             tipo: tipo,
             ano: ano,
             mes: mes,
+            descricao: descricao,
             usuario: usuarioLogado.id
         }
-
+                
         ApiServices.consultarLancamento(lancamentoFiltro)
-                .then(resposta => {
-                    setLancamentos(resposta.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                    .then(resposta => {
+                        setLancamentos(resposta.data)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
     }
 
-    const meses = [
-        {label:'SELECIONE', value: ''},
-        {label:'Janeiro', value: 1},
-        {label:'Fevereiro', value: 2},
-        {label:'Março', value: 3},
-        {label:'Abril', value: 4},
-        {label:'Maio', value: 5},
-        {label:'Junho', value: 6},
-        {label:'Julho', value: 7},
-        {label:'Agosto', value: 8},
-        {label:'Setembro', value: 9},
-        {label:'Outubro', value: 10},
-        {label:'Novembro', value: 11},
-        {label:'Dezembro', value: 12}
-    ]
+    const meses = ApiServices.obterListaMeses()
 
-    const tipos = [
-        {label:'SELECIONE', value: ''},
-        {label:'Despesa', value: 'DESPESA'},
-        {label:'Receita', value: 'RECEITA'}
-    ]
+    const tipos = ApiServices.obterListaTipos()
+
+    useEffect(() => {
+        
+    }, [lancamentos])
 
     return(
         <Card title="Consulta Lançamentos">
@@ -79,6 +88,15 @@ function ConsultaLancamentos(){
                                         lista={meses}/>
                         </FormGroup>
 
+                        <FormGroup htmlFor="inputDesc" label="Descrição: ">
+                            <input type="text"
+                                    className="form-control"
+                                    id="inputDesc"
+                                    value={descricao}
+                                    onChange={e => setDescricao(e.target.value)}
+                                    placeholder="Digite uma descrição" />
+                        </FormGroup>
+
                         <FormGroup htmlFor="inputTipo" label="Tipo lançamento: ">
                             <SelectMenu id="inputTipo"
                                         value={tipo}
@@ -96,7 +114,7 @@ function ConsultaLancamentos(){
             <div className="row">
                 <div className="col-md-12">
                     <div className="bs-component">
-                        <LancamentosTable lancamentos={lancamentos}/>
+                        <LancamentosTable lancamentos={lancamentos} editAction={editar} deleteAction={deletar}/>
                     </div>
                 </div>
             </div>

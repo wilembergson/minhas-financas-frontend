@@ -35,7 +35,41 @@ export default class ApiServices{
             params = `${params}&usuario=${lancamentoFiltro.usuario}`
         }
 
+        if(lancamentoFiltro.descricao){
+            params = `${params}&descricao=${lancamentoFiltro.descricao}`
+        }
+
         return axios.get(`${baseUrl}/api/lancamentos${params}`)
+    }
+
+    static deletarLancamento(id){
+        return axios.delete(`${baseUrl}/api/lancamentos/${id}`)
+    }
+
+    static obterListaMeses(){
+        return [
+            {label:'SELECIONE', value: ''},
+            {label:'Janeiro', value: 1},
+            {label:'Fevereiro', value: 2},
+            {label:'Março', value: 3},
+            {label:'Abril', value: 4},
+            {label:'Maio', value: 5},
+            {label:'Junho', value: 6},
+            {label:'Julho', value: 7},
+            {label:'Agosto', value: 8},
+            {label:'Setembro', value: 9},
+            {label:'Outubro', value: 10},
+            {label:'Novembro', value: 11},
+            {label:'Dezembro', value: 12}
+        ]
+    }
+
+    static obterListaTipos(){
+        return [
+            {label:'SELECIONE', value: ''},
+            {label:'Despesa', value: 'DESPESA'},
+            {label:'Receita', value: 'RECEITA'}
+        ]
     }
 }
 

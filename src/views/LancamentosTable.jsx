@@ -1,18 +1,7 @@
 import React from 'react' 
+import currencyFormater from 'currency-formatter'
 
-export default function LancamentosTable(props){
-
-    const rows = props.lancamentos.map(lancamento => {
-        return(
-            <tr key={lancamento.id}>
-                <td>{lancamento.descricao}</td>
-                <td>{lancamento.valor}</td>
-                <td>{lancamento.tipo}</td>
-                <td>{lancamento.mes}</td>
-                <td>{lancamento.status}</td>
-            </tr>
-        )
-    })
+export default function LancamentosTable({lancamentos, editAction, deleteAction}){
 
     return(
         <table className="table table-hover">
@@ -28,7 +17,21 @@ export default function LancamentosTable(props){
             </thead>
 
             <tbody>
-                {rows}
+                {lancamentos.map(lancamento => {
+                    return(
+                        <tr key={lancamento.id}>
+                            <td>{lancamento.descricao}</td>
+                            <td>{currencyFormater.format(lancamento.valor, {locale: 'pt-BR'})}</td>
+                            <td>{lancamento.tipo}</td>
+                            <td>{lancamento.mes}</td>
+                            <td>{lancamento.status}</td>
+                            <td>
+                                <button onClick={e => editAction(lancamento.id)} type="button" className="btn btn-primary">Editar</button>
+                                <button onClick={e => deleteAction(lancamento.id)} type="button" className="btn btn-danger">Deletar</button>
+                            </td>
+                        </tr>
+                    )
+                })}
             </tbody>
         </table>
     )
