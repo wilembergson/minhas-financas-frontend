@@ -22,7 +22,7 @@ function CadastroLancamentos(props){
     const [status, setStatus] = useState('')
 
     const [chave, setChave] = useState(false)
-
+    
     const [lancamento, setLancamento] = useState({
                                             id: null,
                                             descricao: '',
@@ -59,13 +59,14 @@ function CadastroLancamentos(props){
     if(params.id){
         ApiServices.obterLancamentoPorId(params.id)
                     .then(response => {
-                        setLancamento({...response.data})
                         if(chave===false){
+                            setLancamento({...response.data})
                             setDescricao(lancamento.descricao)
                             setValor(lancamento.valor)
                             setMes(lancamento.mes)
                             setAno(lancamento.ano)
                             setTipo(lancamento.tipo)
+                            setStatus(lancamento.status)
 
                             setChave(true)
                         }
@@ -75,28 +76,20 @@ function CadastroLancamentos(props){
                     })
     }
 
-    
+    function onChange(evento) {
+        const { name, value } = evento.target
+        setLancamento({ ...lancamento, [name]: value })
+    }
+    console.log(lancamento)
 
     function atualizar(){
-        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
-
-        setLancamento({
-            id: params.id,
-            descricao: descricao,
-            valor: valor,
-            mes: mes,
-            ano: ano,
-            tipo: tipo,
-            status: status,
-            usuario: usuarioLogado.id
-        }) 
 
         ApiServices.atualizarLancamento(lancamento)
                     .then(response => {
                         props.history.push('/consultaLancamentos')
                         messages.mensagemSucesso('Lançamento atualizado com sucesso.')
                     }).catch(error => {
-                       messages.mensagemErro(error.response.data)
+                        messages.mensagemErro(error.response.data.message)
                     })
     }
     
@@ -109,8 +102,8 @@ function CadastroLancamentos(props){
                                 type="text"
                                 className="form-control"
                                 name="descricao"
-                                value={descricao}
-                                onChange={e => setDescricao(e.target.value)}/>
+                                value={lancamento.descricao}
+                                onChange={e => onChange(e)}/>
                     </FormGroup>
                 </div>
             </div>
@@ -121,8 +114,8 @@ function CadastroLancamentos(props){
                         <input id="inputAno"
                                 type="text"
                                 name="ano"
-                                value={ano}
-                                onChange={e => setAno(e.target.value)}
+                                value={lancamento.ano}
+                                onChange={e => onChange(e)}
                                 className="form-control"/>
                     </FormGroup>
                 </div>
@@ -132,8 +125,8 @@ function CadastroLancamentos(props){
                                     lista={meses}
                                     className="form-control"
                                     name="mes"
-                                    value={mes}
-                                    onChange={e => setMes(e.target.value)}/>
+                                    value={lancamento.mes}
+                                    onChange={e => onChange(e)}/>
                     </FormGroup>
                 </div>
             </div>
@@ -145,8 +138,8 @@ function CadastroLancamentos(props){
                                 type="text"
                                 className="form-control"
                                 name="valor"
-                                value={valor}
-                                onChange={e => setValor(e.target.value)}/>
+                                value={lancamento.valor}
+                                onChange={e => onChange(e)}/>
                     </FormGroup>
                 </div>
                 <div className="col-md-4">
@@ -155,8 +148,8 @@ function CadastroLancamentos(props){
                                     lista={tipos}
                                     className="form-control"
                                     name="tipo"
-                                    value={tipo}
-                                    onChange={e => setTipo(e.target.value)}/>
+                                    value={lancamento.tipo}
+                                    onChange={e => onChange(e)}/>
                     </FormGroup>
                 </div>
                 <div className="col-md-4">
@@ -164,7 +157,7 @@ function CadastroLancamentos(props){
                         <input type="text"
                                 className="form-control"
                                 name="status"
-                                value={status}
+                                value={lancamento.status}
                                 disabled />
                     </FormGroup>
                 </div>

@@ -19,7 +19,7 @@ toastr.options = {
   }
 
   export function mostrarMensagem(titulo, mensagem, tipo){
-      toastr[tipo](mensagem, titulo)
+      return toastr[tipo](mensagem, titulo)
   }
 
   export function mensagemErro(mensagem){
