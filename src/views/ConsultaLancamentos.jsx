@@ -12,7 +12,7 @@ import * as messages from '../components/Taostr'
 import { Dialog } from 'primereact/dialog'
 import { Button } from 'primereact/button'
 
-function ConsultaLancamentos(){
+function ConsultaLancamentos(props){
     const [ano, setAno] = useState('')
     const [mes, setMes] = useState('')
     const [tipo, setTipo] = useState('')
@@ -21,7 +21,7 @@ function ConsultaLancamentos(){
     const [lancamentoDeletar, setLancamentoDeletar] = useState({})
     const [lancamentos, setLancamentos] = useState([])
     
-    function buscar(){
+    function buscar(props){
         if(!ano){
             messages.mensagemErro('O preenchimento do campo ano é obrigatório.')
             return false
@@ -31,7 +31,7 @@ function ConsultaLancamentos(){
     }
 
     function editar(id){
-        console.log('Editando o lançamento.', id)
+        props.history.push(`/cadastroLancamentos/${id}`)
     }
 
     function abirConfirmacao(lancamento){
@@ -83,9 +83,12 @@ function ConsultaLancamentos(){
             <div>
                 <Button label="Confirmar" icon="pi pi-check" onClick={deletar}/>
                 <Button label="Cancelar" icon="pi pi-times" onClick={cancelarDelecao} className="p-button-secundary"/>
-
             </div>
         )
+    }
+
+    function preparaFormularioCadastro(){
+        props.history.push('/cadastroLancamentos')
     }
 
     return(
@@ -128,7 +131,7 @@ function ConsultaLancamentos(){
                         </FormGroup>
 
                         <button onClick={buscar} type="button" className="btn btn-success">Buscar</button>       
-                        <button type="button" className="btn btn-danger">Cadastrar</button>
+                        <button onClick={preparaFormularioCadastro} type="button" className="btn btn-danger">Cadastrar</button>
                     </div>
                 </div>
             </div>

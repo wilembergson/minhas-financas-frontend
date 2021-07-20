@@ -1,4 +1,4 @@
-import React, { useState } from 'react' 
+import React, { useEffect, useState } from 'react' 
 import Card from '../components/Cards'
 import SelectMenu from '../components/SelectMenu'
 
@@ -9,7 +9,7 @@ import * as messages from '../components/Taostr'
 import ApiServices from '../Services/ApiServices'
 import LocalStorageService from '../Services/LocalStorageService'
 
-function CadastroLancamentos(){
+function CadastroLancamentos(props){
     
     const tipos = ApiServices.obterListaTipos()
     const meses = ApiServices.obterListaMeses()
@@ -21,23 +21,78 @@ function CadastroLancamentos(){
     const [tipo, setTipo] = useState('')
     const [status, setStatus] = useState('')
 
+    const [lancamento, setLancamento] = useState({
+                                            id: null,
+                                            descricao: '',
+                                            valor: '',
+                                            mes: '',
+                                            ano: '',
+                                            tipo: '',
+                                            status: '',
+                                            usuario: null
+                                        })
+
     function submeter(){
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
 
-        const lancamento = {
+        setLancamento({
             descricao: descricao,
             valor: valor,
             mes: mes,
             ano: ano,
             tipo: tipo,
             usuario: usuarioLogado.id
-        }
+        }) 
 
         ApiServices.salvarLancamento(lancamento)
                     .then(response => {
+                        props.history.push('/consultaLancamentos')
                         messages.mensagemSucesso('Lançamento cadastrado com sucesso.')
                     }).catch(error => {
-                        messages.mensagemErro(error.response.data)
+                       messages.mensagemErro(error.response.data)
+                    })
+    }
+
+    useEffect(() => {
+        setDescricao(lancamento.descricao)
+        setValor(lancamento.valor)
+        setMes(lancamento.mes)
+        setAno(lancamento.ano)
+        setTipo(lancamento.tipo)
+    }, [lancamento])
+
+    const params = props.match.params
+    if(params.id){
+        ApiServices.obterLancamentoPorId(params.id)
+                    .then(response => {
+                        setLancamento({...response.data})
+                    })
+                    .catch(erros => {
+                        messages.mensagemErro(erros.response.data)
+                    })
+    }
+
+    
+
+    function atualizar(){
+        const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
+
+        setLancamento({
+            id: params.id,
+            descricao: descricao,
+            valor: valor,
+            mes: mes,
+            ano: ano,
+            tipo: tipo,
+            usuario: usuarioLogado.id
+        }) 
+
+        ApiServices.atualizarLancamento(lancamento)
+                    .then(response => {
+                        props.history.push('/consultaLancamentos')
+                        messages.mensagemSucesso('Lançamento atualizado com sucesso.')
+                    }).catch(error => {
+                       messages.mensagemErro(error.response.data)
                     })
     }
     
@@ -114,7 +169,8 @@ function CadastroLancamentos(){
             <div className="row">
                 <div className="col-md-6">
                     <button onClick={submeter} className="btn btn-success">Salvar</button>
-                    <button className="btn btn-danger">Cancelar</button>
+                    <button onClick={atualizar} className="btn btn-primary">Atualizar</button>
+                    <button onClick={e => props.history.push('/consultaLancamentos')} className="btn btn-danger">Cancelar</button>
 
                 </div>
             </div>

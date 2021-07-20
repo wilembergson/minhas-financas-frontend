@@ -20,6 +20,14 @@ export default class ApiServices{
         return axios.post(`${baseUrl}/api/lancamentos`, lancamento)
     }
 
+    static atualizarLancamento(lancamento){
+        return axios.put(`${baseUrl}/api/lancamentos/${lancamento.id}`, lancamento)
+    }
+
+    static obterLancamentoPorId(id){
+        return axios.get(`${baseUrl}/api/lancamentos/${id}`)
+    }
+
     static consultarLancamento(lancamentoFiltro){
         let params = `?ano=${lancamentoFiltro.ano}`
 
