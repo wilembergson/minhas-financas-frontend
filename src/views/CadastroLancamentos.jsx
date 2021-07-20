@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react' 
+import React, { useState } from 'react' 
 import Card from '../components/Cards'
 import SelectMenu from '../components/SelectMenu'
 
@@ -20,6 +20,8 @@ function CadastroLancamentos(props){
     const [ano, setAno] = useState('')
     const [tipo, setTipo] = useState('')
     const [status, setStatus] = useState('')
+
+    const [chave, setChave] = useState(false)
 
     const [lancamento, setLancamento] = useState({
                                             id: null,
@@ -53,19 +55,20 @@ function CadastroLancamentos(props){
                     })
     }
 
-    useEffect(() => {
-        setDescricao(lancamento.descricao)
-        setValor(lancamento.valor)
-        setMes(lancamento.mes)
-        setAno(lancamento.ano)
-        setTipo(lancamento.tipo)
-    }, [lancamento])
-
     const params = props.match.params
     if(params.id){
         ApiServices.obterLancamentoPorId(params.id)
                     .then(response => {
                         setLancamento({...response.data})
+                        if(chave===false){
+                            setDescricao(lancamento.descricao)
+                            setValor(lancamento.valor)
+                            setMes(lancamento.mes)
+                            setAno(lancamento.ano)
+                            setTipo(lancamento.tipo)
+
+                            setChave(true)
+                        }
                     })
                     .catch(erros => {
                         messages.mensagemErro(erros.response.data)
@@ -84,6 +87,7 @@ function CadastroLancamentos(props){
             mes: mes,
             ano: ano,
             tipo: tipo,
+            status: status,
             usuario: usuarioLogado.id
         }) 
 
