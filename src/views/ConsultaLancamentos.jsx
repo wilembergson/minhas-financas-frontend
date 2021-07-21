@@ -91,6 +91,21 @@ function ConsultaLancamentos(props){
         props.history.push('/cadastroLancamentos')
     }
 
+    function alterarStatus(lancamento, status){
+        ApiServices.alterarStatus(lancamento.id, status)
+                    .then(response => {
+                        const copiaLancamentos = lancamentos
+                        const index = copiaLancamentos.indexOf(lancamento)
+                        if(index !== -1){
+                            lancamento['status'] = status
+                            copiaLancamentos[index] = lancamento
+                            setLancamentos(copiaLancamentos)
+                            atualizarTabela()
+                        }
+                        messages.mensagemSucesso("Status atualizado com sucesso.")
+                    })
+    }
+
     return(
         <Card title="Consulta Lançamentos">
             <div className="row">
@@ -130,8 +145,13 @@ function ConsultaLancamentos(props){
                                         lista={tipos}/>
                         </FormGroup>
 
-                        <button onClick={buscar} type="button" className="btn btn-success">Buscar</button>       
-                        <button onClick={preparaFormularioCadastro} type="button" className="btn btn-danger">Cadastrar</button>
+                        <button onClick={buscar} type="button" className="btn btn-success">
+                            <i className="pi pi-search"/>  Buscar
+                        </button>
+                               
+                        <button onClick={preparaFormularioCadastro} type="button" className="btn btn-danger">
+                        <i className="pi pi-plus"/>  Cadastrar
+                        </button>
                     </div>
                 </div>
             </div>
@@ -139,7 +159,11 @@ function ConsultaLancamentos(props){
             <div className="row">
                 <div className="col-md-12">
                     <div className="bs-component">
-                        <LancamentosTable lancamentos={lancamentos} editAction={editar} deleteAction={abirConfirmacao}/>
+                        <LancamentosTable lancamentos={lancamentos}
+                                            alterarStatus ={alterarStatus}
+                                            editAction={editar}
+                                            deleteAction={abirConfirmacao}
+                                            />
                     </div>
                 </div>
             </div>

@@ -60,6 +60,10 @@ export default class ApiServices{
         return axios.delete(`${baseUrl}/api/lancamentos/${id}`)
     }
 
+    static alterarStatus(id, status){
+        return axios.put(`${baseUrl}/api/lancamentos/${id}/atualizar-status`, { status })
+    }
+
     static validar(lancamento){
         const erros = []
 
