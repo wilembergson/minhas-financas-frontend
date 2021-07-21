@@ -17,7 +17,7 @@ export default function Rotas(){
                     <Route path="/login" component={Login}/>
                     <Route path="/cadastroUsuario" component={CadastroUsuario}/>
                     <Route path="/consultaLancamentos" component={ConsultaLancamentos }/>
-                    <Route path="/cadastroLancamentos/:id" component={CadastroLancamentos }/>
+                    <Route path="/cadastroLancamentos/:id?" component={CadastroLancamentos }/>
 
                 </div>
             </Switch>

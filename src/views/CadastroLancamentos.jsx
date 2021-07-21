@@ -14,14 +14,8 @@ function CadastroLancamentos(props){
     const tipos = ApiServices.obterListaTipos()
     const meses = ApiServices.obterListaMeses()
 
-    const [descricao, setDescricao] = useState('')
-    const [valor, setValor] = useState('')
-    const [mes, setMes] = useState('')
-    const [ano, setAno] = useState('')
-    const [tipo, setTipo] = useState('')
-    const [status, setStatus] = useState('')
-
     const [chave, setChave] = useState(false)
+    const [atualizando, setAtualizando] = useState(false)
     
     const [lancamento, setLancamento] = useState({
                                             id: null,
@@ -37,16 +31,24 @@ function CadastroLancamentos(props){
     function submeter(){
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
 
-        setLancamento({
-            descricao: descricao,
-            valor: valor,
-            mes: mes,
-            ano: ano,
-            tipo: tipo,
+        const lancamento_salvar = {
+            descricao: lancamento.descricao,
+            valor: lancamento.valor,
+            mes: lancamento.mes,
+            ano: lancamento.ano,
+            tipo: lancamento.tipo,
             usuario: usuarioLogado.id
-        }) 
+        }
 
-        ApiServices.salvarLancamento(lancamento)
+        try{
+            ApiServices.validar(lancamento_salvar)
+        }catch(erro){
+            const mensagens = erro.mensagens
+            mensagens.forEach(msg => messages.mensagemErro(msg))
+            return false
+        }
+
+        ApiServices.salvarLancamento(lancamento_salvar)
                     .then(response => {
                         props.history.push('/consultaLancamentos')
                         messages.mensagemSucesso('Lançamento cadastrado com sucesso.')
@@ -61,12 +63,7 @@ function CadastroLancamentos(props){
                     .then(response => {
                         if(chave===false){
                             setLancamento({...response.data})
-                            setDescricao(lancamento.descricao)
-                            setValor(lancamento.valor)
-                            setMes(lancamento.mes)
-                            setAno(lancamento.ano)
-                            setTipo(lancamento.tipo)
-                            setStatus(lancamento.status)
+                            setAtualizando(true)
 
                             setChave(true)
                         }
@@ -80,7 +77,6 @@ function CadastroLancamentos(props){
         const { name, value } = evento.target
         setLancamento({ ...lancamento, [name]: value })
     }
-    console.log(lancamento)
 
     function atualizar(){
 
@@ -94,7 +90,7 @@ function CadastroLancamentos(props){
     }
     
     return(
-        <Card title="Cadastro de lançamento">
+        <Card title={atualizando ? 'Atualização de lançamento' : 'Cadastro de lançamento'}>
             <div className="row">
                 <div className="col-md-12">
                     <FormGroup id="inputDescricao" label="Descricao: *">
@@ -165,8 +161,14 @@ function CadastroLancamentos(props){
 
             <div className="row">
                 <div className="col-md-6">
-                    <button onClick={submeter} className="btn btn-success">Salvar</button>
-                    <button onClick={atualizar} className="btn btn-primary">Atualizar</button>
+                    {atualizando ? (
+                            <button onClick={atualizar} className="btn btn-primary">Atualizar</button>
+
+                        ):(
+                            <button onClick={submeter} className="btn btn-success">Salvar</button>
+
+                        )
+                    }
                     <button onClick={e => props.history.push('/consultaLancamentos')} className="btn btn-danger">Cancelar</button>
 
                 </div>

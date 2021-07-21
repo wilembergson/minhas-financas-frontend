@@ -1,5 +1,7 @@
 import axios from "axios"
 
+import ErroValidacao from "../exception/ErroValidacao";
+
 const baseUrl = 'http://localhost:8080'
 
 export default class ApiServices{
@@ -56,6 +58,34 @@ export default class ApiServices{
 
     static deletarLancamento(id){
         return axios.delete(`${baseUrl}/api/lancamentos/${id}`)
+    }
+
+    static validar(lancamento){
+        const erros = []
+
+        if(!lancamento.ano){
+            erros.push("Informe o ano.")
+        }
+
+        if(!lancamento.mes){
+            erros.push("Informe o mês.")
+        }
+
+        if(!lancamento.descricao){
+            erros.push("Informe a descrição.")
+        }
+
+        if(!lancamento.valor){
+            erros.push("Informe o valor.")
+        }
+
+        if(!lancamento.tipo){
+            erros.push("Informe o tipo.")
+        }
+
+        if(erros && erros.length > 0){
+            throw new ErroValidacao(erros)
+        }
     }
 
     static obterListaMeses(){
