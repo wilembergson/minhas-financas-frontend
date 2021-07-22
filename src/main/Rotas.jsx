@@ -5,17 +5,14 @@ import Home from '../views/Home'
 import CadastroUsuario from '../views/CadastroUsuario'
 import ConsultaLancamentos from '../views/ConsultaLancamentos'
 import CadastroLancamentos from '../views/CadastroLancamentos'
+import AuthService from '../Services/AuthService'
 
 import {Route, Switch, HashRouter, Redirect} from 'react-router-dom'
-
-const isUsuarioAutenticado = () => {
-    return false
-}
 
 function RotaAutenticada({component: Component, ...props}){
     return(
         <Route {...props} render={(componentProps) => {
-            if(isUsuarioAutenticado()){
+            if(AuthService.isUsuarioAutenticado()){
                 return(
                     <Component {...componentProps}/>
                 )
