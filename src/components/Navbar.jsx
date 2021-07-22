@@ -7,6 +7,10 @@ const deslogar = () => {
   AuthService.removerUsuarioLogado()
 }
 
+const isUsuarioAutenticado = () => {
+  return AuthService.isUsuarioAutenticado()
+}
+
 export default function Navbar(){
     return(
     <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
@@ -17,10 +21,10 @@ export default function Navbar(){
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
                 <ul className="navbar-nav">
-                    <NavbarItem href="#/home" label="Home"/>
-                    <NavbarItem href="#/cadastroUsuario" label="Usuários"/>
-                    <NavbarItem href="#/consultaLancamentos" label="Lançamentos"/>
-                    <NavbarItem onClick={deslogar} href="#/login" label="Sair"/>
+                    <NavbarItem render={isUsuarioAutenticado()} href="#/home" label="Home"/>
+                    <NavbarItem render={isUsuarioAutenticado()} href="#/cadastroUsuario" label="Usuários"/>
+                    <NavbarItem render={isUsuarioAutenticado()} href="#/consultaLancamentos" label="Lançamentos"/>
+                    <NavbarItem render={isUsuarioAutenticado()} onClick={deslogar} href="#/login" label="Sair"/>
                 </ul>
             </div>
       </div>
