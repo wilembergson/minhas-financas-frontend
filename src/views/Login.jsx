@@ -51,8 +51,12 @@ function Login(props){
                                                 className="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Password"/>
                                             </FormGroup>
 
-                                            <button className="btn btn-success" onClick={entrar}>Entrar</button>
-                                            <button onClick={prepareCadastrar} className="btn btn-danger">Cadastar</button>
+                                            <button className="btn btn-success" onClick={entrar}>
+                                                <i className="pi pi-sign-in"/> Entrar
+                                            </button>
+                                            <button onClick={prepareCadastrar} className="btn btn-danger">
+                                                <i className="pi pi-plus"/> Cadastar
+                                            </button>
 
                                             <span>{mensagemErro}</span>
 

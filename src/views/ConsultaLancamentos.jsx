@@ -67,6 +67,11 @@ function ConsultaLancamentos(props){
                 
         ApiServices.consultarLancamento(lancamentoFiltro)
                     .then(resposta => {
+                        const lista = resposta.data
+
+                        if(lista.length < 1){
+                            messages.mensagemAlert("Nenhum resultado encontrado.")
+                        }
                         setLancamentos(resposta.data)
                     })
                     .catch(error => {
