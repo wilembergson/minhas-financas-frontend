@@ -5,14 +5,15 @@ import Home from '../views/Home'
 import CadastroUsuario from '../views/CadastroUsuario'
 import ConsultaLancamentos from '../views/ConsultaLancamentos'
 import CadastroLancamentos from '../views/CadastroLancamentos'
-import AuthService from '../Services/AuthService'
+//import AuthService from '../Services/AuthService'
+import {AuthConsumer} from '../main/ProvedorAutenticacao'
 
 import {Route, Switch, HashRouter, Redirect} from 'react-router-dom'
 
-function RotaAutenticada({component: Component, ...props}){
+function RotaAutenticada({component: Component, isUsuarioAutenticado, ...props}){
     return(
         <Route {...props} render={(componentProps) => {
-            if(AuthService.isUsuarioAutenticado()){
+            if(isUsuarioAutenticado){
                 return(
                     <Component {...componentProps}/>
                 )
@@ -25,7 +26,7 @@ function RotaAutenticada({component: Component, ...props}){
     )
 }
 
-export default function Rotas(){
+function Rotas(props){
     return(
         <HashRouter>
             <Switch>
@@ -33,12 +34,18 @@ export default function Rotas(){
                     <Route path="/login" component={Login}/>
                     <Route path="/cadastroUsuario" component={CadastroUsuario}/>
 
-                    <RotaAutenticada path="/home" component={Home}/>
-                    <RotaAutenticada path="/consultaLancamentos" component={ConsultaLancamentos }/>
-                    <RotaAutenticada path="/cadastroLancamentos/:id?" component={CadastroLancamentos }/>
+                    <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/home" component={Home}/>
+                    <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/consultaLancamentos" component={ConsultaLancamentos }/>
+                    <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/cadastroLancamentos/:id?" component={CadastroLancamentos }/>
 
                 </div>
             </Switch>
         </HashRouter>
     )
 }
+
+export default () => (
+    <AuthConsumer>
+        { (context) => (<Rotas isUsuarioAutenticado={context.isAutenticado} />)}
+    </AuthConsumer>
+)
