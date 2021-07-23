@@ -3,6 +3,7 @@ import AuthService from '../Services/AuthService'
 
 export const AuthContext = React.createContext()
 export const AuthConsumer = AuthContext.Consumer
+
 const AuthProvider = AuthContext.Provider
 
 export default function ProvedorAutenticacao(props){
@@ -17,7 +18,7 @@ export default function ProvedorAutenticacao(props){
         setState({isAutenticado: true, usuarioAutenticado: usuario})
     }
 
-    function encerrarSessao(){
+    function encerrarSessao(usuario){
         AuthService.removerUsuarioLogado(usuario)
         setState({isAutenticado: false, usuarioAutenticado: null})
     }

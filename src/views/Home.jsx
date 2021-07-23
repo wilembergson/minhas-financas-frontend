@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 
 import ApiServices from '../Services/ApiServices'
-import LocalStorageService from '../Services/LocalStorageService'
+//import LocalStorageService from '../Services/LocalStorageService'
+import { AuthContext } from '../main/ProvedorAutenticacao'
 
 export default function Home(){
+    const contexto = React.useContext(AuthContext)
     const [saldo, setSaldo] = useState(0)
 
-    const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
+    const usuarioLogado = contexto.usuarioAutenticado
 
     ApiServices.obterSaldo(usuarioLogado.id)
             .then(response => {

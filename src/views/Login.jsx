@@ -4,8 +4,12 @@ import FormGroup from '../components/FormGroup'
 import { withRouter } from 'react-router-dom'
 import ApiServices from '../Services/ApiServices'
 import {mensagemErro} from '../components/Taostr.js'
+import { AuthContext } from '../main/ProvedorAutenticacao'
+
+
 
 function Login(props){
+    const contexto = React.useContext(AuthContext)
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -13,7 +17,8 @@ function Login(props){
     function entrar(){
         ApiServices.autenticar({email: email, senha: senha})
             .then(response => {
-                localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+                //localStorage.setItem('_usuario_logado', JSON.stringify(response.data))
+                contexto.iniciarSessao(response.data)
                 props.history.push('/home')
             })
             .catch(erro => {
@@ -70,5 +75,6 @@ function Login(props){
             </div>
     )
 }
+
 
 export default withRouter(Login)
