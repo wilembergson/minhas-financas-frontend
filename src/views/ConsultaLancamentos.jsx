@@ -7,7 +7,7 @@ import LancamentosTable from './LancamentosTable'
 
 import ApiServices from '../Services/ApiServices'
 import LocalStorageService from '../Services/LocalStorageService'
-import * as messages from '../components/Taostr'
+import * as messages from '../components/Toastr'
 
 import { Dialog } from 'primereact/dialog'
 import { Button } from 'primereact/button'

@@ -8,7 +8,7 @@ import CadastroLancamentos from '../views/CadastroLancamentos'
 //import AuthService from '../Services/AuthService'
 import {AuthConsumer} from '../main/ProvedorAutenticacao'
 
-import {Route, Switch, HashRouter, Redirect} from 'react-router-dom'
+import {BrowserRouter, Route, Switch, Redirect, HashRouter} from 'react-router-dom'
 
 function RotaAutenticada({component: Component, isUsuarioAutenticado, ...props}){
     return(

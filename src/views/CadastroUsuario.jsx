@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
 import ApiServices from '../Services/ApiServices';
-import {mensagemErro, mensagemSucesso} from '../components/Taostr'
+import {mensagemErro, mensagemSucesso} from '../components/Toastr'
 
 function CadastroUsuario(props){
 

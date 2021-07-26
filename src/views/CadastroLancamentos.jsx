@@ -4,7 +4,7 @@ import SelectMenu from '../components/SelectMenu'
 
 import { withRouter } from 'react-router-dom'
 import FormGroup from '../components/FormGroup'
-import * as messages from '../components/Taostr'
+import * as messages from '../components/Toastr'
 
 import ApiServices from '../Services/ApiServices'
 import LocalStorageService from '../Services/LocalStorageService'

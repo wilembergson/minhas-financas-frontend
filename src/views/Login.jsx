@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Card from '../components/Cards'
+import './Login.css'
 import FormGroup from '../components/FormGroup'
 import { withRouter } from 'react-router-dom'
 import ApiServices from '../Services/ApiServices'
-import {mensagemErro} from '../components/Taostr.js'
+import {mensagemErro} from '../components/Toastr.js'
 import { AuthContext } from '../main/ProvedorAutenticacao'
 
 
@@ -26,53 +26,49 @@ function Login(props){
             })
     }
 
-    function prepareCadastrar(){
+    function cancelar(){
         props.history.push('/cadastroUsuario')
     }
 
     return(
-        <div className="row">
-                <div className="col-md-6" style={{position:'relative', left: '300px'}}>
-                    <div className="bs-docs-section">
-                        <Card title="Login">
-                            <div className="row">
-                                <div className="col-lg-12">
-                                    <div className="bs-component">
-                                        <fieldset>
-                                            <FormGroup label="Email: *" htmlFor="exampleInputEmail1">
-                                                <input type="email"
-                                                    value={email}
-                                                     onChange={e => setEmail(e.target.value)}
-                                                    className="form-control" 
-                                                    id="exampleInputEmail1" 
-                                                    aria-describedby="emailHelp" 
-                                                    placeholder="Digite o Email"/>
-                                            </FormGroup>
-
-                                            <FormGroup label="Senha: *" htmlFor="exampleInputPassword1">
-                                                <input type="password" 
-                                                value={senha}
-                                                onChange={e => setSenha(e.target.value)}
-                                                className="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Password"/>
-                                            </FormGroup>
-
-                                            <button className="btn btn-success" onClick={entrar}>
-                                                <i className="pi pi-sign-in"/> Entrar
-                                            </button>
-                                            <button onClick={prepareCadastrar} className="btn btn-danger">
-                                                <i className="pi pi-plus"/> Cadastar
-                                            </button>
-
-                                            <span>{mensagemErro}</span>
-
-                                        </fieldset>
-                                    </div>
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                </div>
+        <div className="login">
+            <div className="logo">
+                <h2>Minhas finanças</h2>
+                <a className="nav-link" aria-current="page" onClick={cancelar}> Criar conta</a>
             </div>
+
+            <div className="content">
+                <h3 className="l-label">Login</h3>
+                <fieldset>
+                    <FormGroup label="Email" htmlFor="exampleInputEmail1">
+                        <input type="email"
+                            value={email}
+                             onChange={e => setEmail(e.target.value)}
+                            className="form-control" 
+                            id="exampleInputEmail1" 
+                            aria-describedby="emailHelp" 
+                            placeholder="Digite o Email"/>
+                    </FormGroup>
+
+                    <FormGroup label="Senha" htmlFor="exampleInputPassword1">
+                        <input type="password" 
+                        value={senha}
+                        onChange={e => setSenha(e.target.value)}
+                        className="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Password"/>
+                    </FormGroup>
+
+                    {/*<button className="btn btn-success" onClick={entrar}>
+                        <i className="pi pi-sign-in"/> Entrar
+                    </button>*/}
+                    <button className="button" onClick={entrar}>
+                        <i className="pi pi-sign-in"/> Entrar
+                    </button>
+
+                    <span>{mensagemErro}</span>
+
+                </fieldset>
+            </div>               
+        </div>
     )
 }
 
