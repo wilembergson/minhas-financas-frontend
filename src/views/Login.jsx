@@ -34,7 +34,7 @@ function Login(props){
         <div className="login">
             <div className="logo">
                 <h2>Minhas finanças</h2>
-                <a className="nav-link" aria-current="page" onClick={cancelar}> Criar conta</a>
+                
             </div>
 
             <div className="content">
@@ -60,9 +60,13 @@ function Login(props){
                     {/*<button className="btn btn-success" onClick={entrar}>
                         <i className="pi pi-sign-in"/> Entrar
                     </button>*/}
-                    <button className="button" onClick={entrar}>
-                        <i className="pi pi-sign-in"/> Entrar
-                    </button>
+                    <div className="down-side">
+                        <button className="button" onClick={entrar}>
+                            <i className="pi pi-sign-in"/> Entrar
+                        </button>
+
+                        <a className="nav-link" aria-current="page" onClick={cancelar}> Criar conta</a>
+                    </div>
 
                     <span>{mensagemErro}</span>
 

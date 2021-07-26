@@ -1,12 +1,12 @@
 import React from 'react'
-
+import './Navbar.css'
 import NavbarItem from './NavbarItem'
 import { AuthConsumer } from '../main/ProvedorAutenticacao'
 
 function Navbar(props){
 
     return(
-    <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div className="navbar navbar-expand-lg fixed-top navbar-dark">
       <div className="container">
             <a href="/home" className="navbar-brand">Minhas Finanças</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
