@@ -1,12 +1,13 @@
 import React from 'react' 
+import './LancamentosTable.css'
 import currencyFormater from 'currency-formatter'
 
 export default function LancamentosTable({lancamentos, alterarStatus, editAction, deleteAction}){
 
     return(
-        <table className="table table-hover">
+        <table className="t-table">
             <thead>
-                <tr>
+                <tr className="t-row">
                     <th scope="col">ID</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Valor</th>
@@ -20,7 +21,7 @@ export default function LancamentosTable({lancamentos, alterarStatus, editAction
             <tbody>
                 {lancamentos.map(lancamento => {
                     return(
-                        <tr key={lancamento.id}>
+                        <tr className="t-row" key={lancamento.id}>
                             <td>{lancamento.id}</td>
                             <td>{lancamento.descricao}</td>
                             <td>{currencyFormater.format(lancamento.valor, {locale: 'pt-BR'})}</td>
@@ -28,19 +29,19 @@ export default function LancamentosTable({lancamentos, alterarStatus, editAction
                             <td>{lancamento.mes}</td>
                             <td>{lancamento.status}</td>
                             <td>
-                                <button onClick={e => alterarStatus(lancamento, 'EFETIVADO')} disabled={lancamento.status !== 'PENDENTE'} type="button" className="btn btn-success" title="Efetivar">
+                                <button onClick={e => alterarStatus(lancamento, 'EFETIVADO')} disabled={lancamento.status !== 'PENDENTE'} type="button" className="button-confirm" title="Efetivar">
                                     <i className="pi pi-check"/>
                                 </button>
 
-                                <button onClick={e => alterarStatus(lancamento, 'CANCELADO')} disabled={lancamento.status !== 'PENDENTE'} type="button" className="btn btn-warning" title="Cancelar">
+                                <button onClick={e => alterarStatus(lancamento, 'CANCELADO')} disabled={lancamento.status !== 'PENDENTE'} type="button" className="button-warning" title="Cancelar">
                                     <i className="pi pi-times"/>
                                 </button>
 
-                                <button onClick={e => editAction(lancamento.id)} type="button" className="btn btn-primary">
+                                <button onClick={e => editAction(lancamento.id)} type="button" className="button-primary">
                                     <i className="pi pi-pencil" title="Editar"/>
                                 </button>
 
-                                <button onClick={e => deleteAction(lancamento)} type="button" className="btn btn-danger">
+                                <button onClick={e => deleteAction(lancamento)} type="button" className="button-cancel">
                                     <i className="pi pi-trash" title="Excluir"/>
                                 </button>
                             </td>

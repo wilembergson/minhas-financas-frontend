@@ -6,7 +6,7 @@ import Rotas from './Rotas'
 import './App.css'
 import 'toastr/build/toastr.min.js'
 import 'bootswatch/dist/flatly/bootstrap.css'
-import '../custom.css'
+//import '../custom.css'
 import 'toastr/build/toastr.css'
 import ProvedorAutenticacao from './ProvedorAutenticacao'
 

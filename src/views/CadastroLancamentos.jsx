@@ -162,17 +162,17 @@ function CadastroLancamentos(props){
             <div className="row">
                 <div className="col-md-6">
                     {atualizando ? (
-                            <button onClick={atualizar} className="btn btn-primary">
+                            <button onClick={atualizar} className="button-primary">
                                 <i className="pi pi-refresh"/> Atualizar
                             </button>
 
                         ):(
-                            <button onClick={submeter} className="btn btn-success">
+                            <button onClick={submeter} className="button-confirm">
                                 <i className="pi pi-save"/> Salvar</button>
 
                         )
                     }
-                    <button onClick={e => props.history.push('/consultaLancamentos')} className="btn btn-danger">
+                    <button onClick={e => props.history.push('/consultaLancamentos')} className="button-cancel">
                     <i className="pi pi-times"/> Cancelar</button>
 
                 </div>

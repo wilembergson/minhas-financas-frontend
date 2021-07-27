@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import './Home.css'
 
 import ApiServices from '../Services/ApiServices'
-//import LocalStorageService from '../Services/LocalStorageService'
 import { AuthContext } from '../main/ProvedorAutenticacao'
 
 export default function Home(){

@@ -5,10 +5,9 @@ import Home from '../views/Home'
 import CadastroUsuario from '../views/CadastroUsuario'
 import ConsultaLancamentos from '../views/ConsultaLancamentos'
 import CadastroLancamentos from '../views/CadastroLancamentos'
-//import AuthService from '../Services/AuthService'
 import {AuthConsumer} from '../main/ProvedorAutenticacao'
 
-import {BrowserRouter, Route, Switch, Redirect, HashRouter} from 'react-router-dom'
+import {Route, Switch, Redirect, HashRouter} from 'react-router-dom'
 
 function RotaAutenticada({component: Component, isUsuarioAutenticado, ...props}){
     return(

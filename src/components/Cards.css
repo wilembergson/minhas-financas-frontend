@@ -1,0 +1,90 @@
+.card{
+    border-radius: 30px 30px 0 0;
+    margin-top: 100px;
+    box-shadow: 10px 20px 10px #9E9E9E;
+    
+    
+}
+
+.header{
+    color: #fff;
+    background: rgb(60, 182, 100);
+    padding: 20px;
+    
+}
+h3{
+  overflow: hidden;
+}
+
+.c-body{
+    background: rgb(48, 42, 46);
+    padding: 50px;
+    
+}
+
+
+.button-confirm{
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(
+      90deg,
+      rgb(28, 134, 63) 0%,
+      rgb(60, 182, 100) 100%
+    );
+    color: #fff;
+    transition: 0.7s ease;
+}
+
+.button-cancel{
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(
+      90deg,
+      rgb(189, 44, 18) 0%,
+      rgb(248, 68, 68) 100%
+    );
+    color: #fff;
+    transition: 0.7s ease;
+}
+
+.button-warning{
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(
+      90deg,
+      rgb(150, 160, 12) 0%,
+      rgb(210, 212, 40) 100%
+    );
+    color: #fff;
+    transition: 0.7s ease;
+}
+
+.button-primary{
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(
+      90deg,
+      rgb(6, 80, 129) 0%,
+      rgb(9, 145, 163) 100%
+    );
+    color: #fff;
+    transition: 0.7s ease;
+}
+.button-confirm:hover, .button-cancel:hover, .button-primary:hover, .button-warning:hover{
+    color: rgb(41, 36, 36);
+    text-transform: capitalize;
+    transform: scale(1.1);
+    transition: 0.5s ease;
+}

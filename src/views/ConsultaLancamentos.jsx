@@ -150,11 +150,11 @@ function ConsultaLancamentos(props){
                                         lista={tipos}/>
                         </FormGroup>
 
-                        <button onClick={buscar} type="button" className="btn btn-success">
+                        <button onClick={buscar} type="button" className="button-confirm">
                             <i className="pi pi-search"/>  Buscar
                         </button>
                                
-                        <button onClick={preparaFormularioCadastro} type="button" className="btn btn-danger">
+                        <button onClick={preparaFormularioCadastro} type="button" className="button-primary">
                         <i className="pi pi-plus"/>  Cadastrar
                         </button>
                     </div>

@@ -73,10 +73,7 @@ function CadastroUsuario(props){
 
     return(
         <Card title="Cadastro de usuário">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="bs-component">
-                            <FormGroup label="Nome: *" htmlForm="inputNome">
+                <FormGroup label="Nome: *" htmlForm="inputNome">
                                 <input type="text"
                                         id="inputNome"
                                         className="form-control"
@@ -108,15 +105,12 @@ function CadastroUsuario(props){
                                         onChange={e => setSenhaRepericao(e.target.value)}/>
                             </FormGroup>
 
-                            <button onClick={cadastrar} type="button" className="btn btn-success">
+                            <button onClick={cadastrar} type="button" className="button-confirm">
                                 <i className="pi pi-save"/> Salvar
                             </button>
-                            <button onClick={cancelar} type="button" className="btn btn-danger">
+                            <button onClick={cancelar} type="button" className="button-cancel">
                                 <i className="pi pi-times"/> Cancelar
                             </button>
-                        </div>
-                    </div>
-                </div>
             </Card>
     )
 }
