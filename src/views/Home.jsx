@@ -4,7 +4,7 @@ import './Home.css'
 import ApiServices from '../Services/ApiServices'
 import { AuthContext } from '../main/ProvedorAutenticacao'
 
-export default function Home(){
+export default function Home(props){
     const contexto = React.useContext(AuthContext)
     const [saldo, setSaldo] = useState(0)
 
@@ -17,17 +17,28 @@ export default function Home(){
                 console.error(error.response)
             })
 
+    function cadUsuario(){
+        props.history.push('/cadastroUsuario')
+    }
+
+    function cadLancamento(){
+        props.history.push('/cadastroLancamentos')
+    }
+
     return(
         <div className="jumbotron">
                 <h1 className="display-3">Bem vindo, {usuarioLogado.nome}!</h1>
                 <p className="lead">Esse é seu sistema de finanças.</p>
-                <p className="lead">Seu saldo para o mês atual é de R${saldo}</p>
+                <p className="lead">Seu saldo atualmente é de R${saldo}</p>
                 <hr className="my-4"/>
                 <p>E essa é sua área administrativa, utilize um dos menus ou botões abaixo para navegar pelo sistema.</p>
-                <p className="lead">
-                  <a className="btn btn-primary btn-lg" href="#/cadastroUsuario" role="button"><i className="pi pi-users"></i> Cadastrar Usuário</a>
-                  <a className="btn btn-danger btn-lg" href="#/cadastroLancamentos" role="button"><i className="pi pi-money-bill"></i> Cadastrar Lançamento</a>
-                </p>
+                
+                <button onClick={cadUsuario} className="button-primary">
+                    <i className="pi pi-users"/> Cadastrar usuário
+                </button>
+                <button onClick={cadLancamento} className="button-primary">
+                <i className="pi pi-money-bill"/> Castrar Lançamento
+                </button>
         </div>
     )
 }

@@ -8,7 +8,11 @@
 
 .header{
     color: #fff;
-    background: rgb(71, 209, 117);
+    background: linear-gradient(
+    90deg,
+    rgb(27, 206, 206) 0%,
+    rgb(71, 209, 117) 100%
+  );
     padding: 20px;
     
 }
@@ -35,8 +39,8 @@ h3{
     outline: none;
     background: linear-gradient(
       90deg,
-      rgb(28, 134, 63) 0%,
-      rgb(60, 182, 100) 100%
+      rgb(32, 134, 28) 0%,
+      rgb(59, 201, 55) 100%
     );
     color: #fff;
     transition: 0.7s ease;

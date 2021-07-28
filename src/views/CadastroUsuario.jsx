@@ -5,9 +5,10 @@ import Card from '../components/Cards'
 import FormGroup from '../components/FormGroup'
 import ApiServices from '../Services/ApiServices';
 import {mensagemErro, mensagemSucesso} from '../components/Toastr'
+import { AuthContext } from '../main/ProvedorAutenticacao'
 
 function CadastroUsuario(props){
-
+    const contexto = React.useContext(AuthContext)
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
@@ -68,7 +69,11 @@ function CadastroUsuario(props){
     }
 
     function cancelar(){
-        props.history.push('/login')
+        if(contexto.isAutenticado){
+            props.history.push('/home')            
+        }else{
+            props.history.push('/login')
+        }
     }
 
     return(
