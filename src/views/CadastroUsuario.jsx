@@ -61,7 +61,7 @@ function CadastroUsuario(props){
         ApiServices.salvarUsuario(usuario)
         .then(response => {
             mensagemSucesso('Usuario cadastrado com sucesso. Faça o login para acessar o sistema.')
-            props.history.push('/login')
+            props.history.push('/')
         }).catch(error => {
             mensagemErro(error.response.data)
         })
@@ -72,7 +72,7 @@ function CadastroUsuario(props){
         if(contexto.isAutenticado){
             props.history.push('/home')            
         }else{
-            props.history.push('/login')
+            props.history.push('/')
         }
     }
 

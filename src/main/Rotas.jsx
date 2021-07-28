@@ -30,7 +30,7 @@ function Rotas(props){
         <HashRouter>
             <Switch>
                 <div className="container">
-                    <Route path="/login" component={Login}/>
+                    <Route path="/" exact component={Login}/>
                     <Route path="/cadastroUsuario" component={CadastroUsuario}/>
 
                     <RotaAutenticada isUsuarioAutenticado={props.isUsuarioAutenticado} path="/home" component={Home}/>
