@@ -34,14 +34,12 @@ h3{
 .button-confirm{
     padding: 10px;
     margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: none;
     cursor: pointer;
     outline: none;
-    background: linear-gradient(
-      90deg,
-      rgb(32, 134, 28) 0%,
-      rgb(59, 201, 55) 100%
-    );
+    background: rgb(32, 134, 28);
     color: #fff;
     transition: 0.7s ease;
 }
@@ -49,14 +47,12 @@ h3{
 .button-cancel{
     padding: 10px;
     margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: none;
     cursor: pointer;
     outline: none;
-    background: linear-gradient(
-      90deg,
-      rgb(189, 44, 18) 0%,
-      rgb(248, 68, 68) 100%
-    );
+    background: rgb(189, 44, 18);
     color: #fff;
     transition: 0.7s ease;
 }
@@ -64,14 +60,12 @@ h3{
 .button-warning{
     padding: 10px;
     margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: none;
     cursor: pointer;
     outline: none;
-    background: linear-gradient(
-      90deg,
-      rgb(150, 160, 12) 0%,
-      rgb(210, 212, 40) 100%
-    );
+    background: rgb(150, 160, 12);
     color: #fff;
     transition: 0.7s ease;
 }
@@ -79,14 +73,12 @@ h3{
 .button-primary{
     padding: 10px;
     margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border: none;
     cursor: pointer;
     outline: none;
-    background: linear-gradient(
-      90deg,
-      rgb(6, 80, 129) 0%,
-      rgb(9, 145, 163) 100%
-    );
+    background: rgb(6, 80, 129);
     color: #fff;
     transition: 0.7s ease;
 }
@@ -95,5 +87,5 @@ h3{
     text-transform: capitalize;
     transform: scale(1.1);
     transition: 0.5s ease;
-    border-radius: 0 15px;
+    border-radius: 15px;
 }

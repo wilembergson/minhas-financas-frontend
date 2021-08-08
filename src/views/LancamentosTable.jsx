@@ -29,21 +29,23 @@ export default function LancamentosTable({lancamentos, alterarStatus, editAction
                             <td>{lancamento.mes}</td>
                             <td>{lancamento.status}</td>
                             <td>
-                                <button onClick={e => alterarStatus(lancamento, 'EFETIVADO')} disabled={lancamento.status !== 'PENDENTE'} type="button" className="button-confirm" title="Efetivar">
-                                    <i className="pi pi-check"/>
-                                </button>
+                                {lancamento.status === 'PENDENTE' ? <div>
+                                    <button onClick={e => editAction(lancamento.id)} type="button" className="button-primary">
+                                        <i className="pi pi-pencil" title="Editar"/>
+                                    </button>
+                                    <button onClick={e => alterarStatus(lancamento, 'EFETIVADO')} disabled={lancamento.status !== 'PENDENTE'} type="button" className="button-confirm" title="Efetivar">
+                                        <i className="pi pi-check"/>
+                                    </button>
 
-                                <button onClick={e => alterarStatus(lancamento, 'CANCELADO')} disabled={lancamento.status !== 'PENDENTE'} type="button" className="button-warning" title="Cancelar">
-                                    <i className="pi pi-times"/>
-                                </button>
+                                    <button onClick={e => alterarStatus(lancamento, 'CANCELADO')} disabled={lancamento.status !== 'PENDENTE'} type="button" className="button-warning" title="Cancelar">
+                                        <i className="pi pi-times"/>
+                                    </button>
+                                </div> : <div>
 
-                                <button onClick={e => editAction(lancamento.id)} type="button" className="button-primary">
-                                    <i className="pi pi-pencil" title="Editar"/>
-                                </button>
-
-                                <button onClick={e => deleteAction(lancamento)} type="button" className="button-cancel">
-                                    <i className="pi pi-trash" title="Excluir"/>
-                                </button>
+                                    <button onClick={e => deleteAction(lancamento)} type="button" className="button-cancel">
+                                        <i className="pi pi-trash" title="Excluir"/>
+                                    </button>
+                                </div>}   
                             </td>
                         </tr>
                     )
