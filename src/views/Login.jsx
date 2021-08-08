@@ -31,7 +31,8 @@ function Login(props){
     }
 
     return(
-        <div className="login">
+        <div className="position">
+            <div className="login">
             <div className="logo">
                 <h2>Minhas finanças</h2>
                 
@@ -72,6 +73,7 @@ function Login(props){
 
                 </fieldset>
             </div>               
+        </div>
         </div>
     )
 }

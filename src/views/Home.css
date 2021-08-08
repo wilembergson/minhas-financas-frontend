@@ -46,3 +46,7 @@
     transition: 0.5s ease;
     border-radius: 0 15px;
 }
+
+.saldo{
+  font-size: 40px;
+}

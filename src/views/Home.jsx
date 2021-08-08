@@ -29,7 +29,7 @@ export default function Home(props){
         <div className="jumbotron">
                 <h1 className="display-3">Bem vindo, {usuarioLogado.nome}!</h1>
                 <p className="lead">Esse é seu sistema de finanças.</p>
-                <p className="lead">Seu saldo atualmente é de R${saldo}</p>
+                <p className="saldo">Saldo atual = R${saldo.toFixed(2)}</p>
                 <hr className="my-4"/>
                 <p>E essa é sua área administrativa, utilize um dos menus ou botões abaixo para navegar pelo sistema.</p>
                 

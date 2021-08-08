@@ -1,7 +1,12 @@
+.position{
+    display: flex;
+    justify-content: center;
+}
+
 .login{
     background: #000;
     display: flex;
-    width: 30%px;
+    width: 70%;
     height: 500px;
     box-shadow: 10px 20px 10px #9E9E9E;
     margin-top: 150px;
