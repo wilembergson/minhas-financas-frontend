@@ -80,3 +80,12 @@ label{
     justify-content: center;
     margin-top: 70px;
 }
+
+.logomark{
+    background-image: url('../img/logo.png');
+    width: 200px;
+    height: 200px;
+}
+h2{
+    color: rgb(4, 4, 112);
+}

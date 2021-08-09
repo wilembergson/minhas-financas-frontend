@@ -6,8 +6,6 @@ import ApiServices from '../Services/ApiServices'
 import {mensagemErro} from '../components/Toastr.js'
 import { AuthContext } from '../main/ProvedorAutenticacao'
 
-
-
 function Login(props){
     const contexto = React.useContext(AuthContext)
 
@@ -34,6 +32,7 @@ function Login(props){
         <div className="position">
             <div className="login">
             <div className="logo">
+            <div className="logomark"></div>
                 <h2>Minhas finanças</h2>
                 
             </div>

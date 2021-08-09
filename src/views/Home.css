@@ -10,34 +10,17 @@
   box-shadow: 2px 5px 2px #9E9E9E;
 }
 
-.button-cancel{
-    padding: 10px;
-    margin-right: 10px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    background: linear-gradient(
-      90deg,
-      rgb(189, 44, 18) 0%,
-      rgb(248, 68, 68) 100%
-    );
-    color: #fff;
-    transition: 0.7s ease;
-}
-
 .button-primary{
-    padding: 10px;
-    margin-right: 10px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    background: linear-gradient(
-      90deg,
-      rgb(6, 80, 129) 0%,
-      rgb(9, 145, 163) 100%
-    );
-    color: #fff;
-    transition: 0.7s ease;
+  padding: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: rgb(6, 80, 129);
+  color: #fff;
+  transition: 0.7s ease;
 }
 .button-cancel:hover, .button-primary:hover{
     color: rgb(8, 8, 8);
