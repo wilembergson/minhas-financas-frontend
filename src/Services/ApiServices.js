@@ -2,7 +2,7 @@ import axios from "axios"
 
 import ErroValidacao from "../exception/ErroValidacao";
 
-const baseUrl = 'http://localhost:8080'
+const baseUrl = 'https://minhas-financas-back.herokuapp.com'
 
 export default class ApiServices{
     

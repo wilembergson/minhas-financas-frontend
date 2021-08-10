@@ -83,7 +83,7 @@ h3{
     transition: 0.7s ease;
 }
 .button-confirm:hover, .button-cancel:hover, .button-primary:hover, .button-warning:hover{
-    color: rgb(8, 8, 8);
+    color: black;
     text-transform: capitalize;
     transform: scale(1.1);
     transition: 0.5s ease;

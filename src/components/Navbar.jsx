@@ -12,7 +12,7 @@ function Navbar(props){
     return(
     <div className="navbar navbar-expand-lg fixed-top navbar-dark">
       <div className="container">
-            <a href={contexto.isAutenticado ? "#/home" : "/"} className="navbar-brand"><img className="logonav" src={Logo}/></a>
+            <a href={contexto.isAutenticado ? "#/home" : "/"} className="navbar-brand" alt=""><img className="logonav" src={Logo}/></a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
