@@ -58,10 +58,10 @@ function ConsultaLancamentos(props){
     function atualizarTabela(){
         const usuarioLogado = LocalStorageService.obterItem('_usuario_logado')
         const lancamentoFiltro = {
-            tipo: tipo,
             ano: ano,
             mes: mes,
             descricao: descricao,
+            tipo: tipo,
             usuario: usuarioLogado.id
         }
                 
@@ -80,8 +80,6 @@ function ConsultaLancamentos(props){
     }
 
     const meses = ApiServices.obterListaMeses()
-
-    const tipos = ApiServices.obterListaTipos()
 
     function confirmDialogFooter(){
         return(
@@ -106,6 +104,8 @@ function ConsultaLancamentos(props){
                             copiaLancamentos[index] = lancamento
                             setLancamentos(copiaLancamentos)
                             atualizarTabela()
+
+
                         }
                         messages.mensagemSucesso("Status atualizado com sucesso.")
                     })
@@ -142,13 +142,6 @@ function ConsultaLancamentos(props){
                                     placeholder="Digite uma descrição" />
                         </FormGroup>
 
-                        <FormGroup htmlFor="inputTipo" label="Tipo lançamento: ">
-                            <SelectMenu id="inputTipo"
-                                        value={tipo}
-                                        onChange={e => setTipo(e.target.value)}
-                                        className="form-control"
-                                        lista={tipos}/>
-                        </FormGroup>
 
                         <button onClick={buscar} type="button" className="button-confirm">
                             <i className="pi pi-search"/>  Buscar

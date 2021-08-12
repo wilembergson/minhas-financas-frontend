@@ -1,4 +1,4 @@
-import React from 'react' 
+import React, { useState } from 'react' 
 import './LancamentosTable.css'
 import currencyFormater from 'currency-formatter'
 
@@ -20,6 +20,7 @@ export default function LancamentosTable({lancamentos, alterarStatus, editAction
 
             <tbody>
                 {lancamentos.map(lancamento => {
+                    
                     return(
                         <tr className="t-row" key={lancamento.id}>
                             <td>{lancamento.id}</td>

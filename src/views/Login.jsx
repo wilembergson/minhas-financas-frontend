@@ -33,7 +33,7 @@ function Login(props){
             <div className="login">
             <div className="logo">
             <div className="logomark"></div>
-                <h2>Minhas finanças</h2>
+                <h2>Minhas Finanças</h2>
                 
             </div>
 

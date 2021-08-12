@@ -41,16 +41,16 @@ export default class ApiServices{
             params = `${params}&tipo=${lancamentoFiltro.tipo}`
         }
 
-        if(lancamentoFiltro.status){
-            params = `${params}&status=${lancamentoFiltro.status}`
-        }
-
         if(lancamentoFiltro.usuario){
             params = `${params}&usuario=${lancamentoFiltro.usuario}`
         }
 
         if(lancamentoFiltro.descricao){
             params = `${params}&descricao=${lancamentoFiltro.descricao}`
+        }
+
+        if(lancamentoFiltro.status){
+            params = `${params}&status=${lancamentoFiltro.status}`
         }
 
         return axios.get(`${baseUrl}/api/lancamentos${params}`)
